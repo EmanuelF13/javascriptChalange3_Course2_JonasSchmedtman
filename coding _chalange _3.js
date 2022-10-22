@@ -51,15 +51,28 @@ let koalasMeansData1 = averageScore(88, 91, 110);
 let dolphinMeansData2 = averageScore(97, 112, 101);
 let koalasMeansData2 = averageScore(109, 95, 106);
 
-function displayHigerScoreMessage() {
+function mainDataConclusion() {
+    let isDolphinWinner = displayHigerScoreMessageOnInterface(dolphinMeansData2, koalasMeansData2);
+    if (isDolphinWinner === -1) { log("Both teams are the Winner!"); return; }
+    if (isDolphinWinner) log("As expecte Dolphin Wins!");
+    else log("As expected Koala Wins!");
+}
+
+function displayHigerScoreMessageOnInterface(dolphinData, koalaData) {
     changeScoresButtons();
-    if (selecWinnerOfCompetition(dolphinMeansData1, koalasMeansData1) === dolphinMeansData1) {
+    if (selecWinnerOfCompetition(dolphinData, koalaData) === -1) {
+        log("Both teams are the winner!");
+        document.getElementById("scores").innerHTML = "Both teams are equaly the best!";
+        return -1;
+    }
+    if (selecWinnerOfCompetition(dolphinData, koalaData) === dolphinData) {
         log('Dolphin have the higher score');
         document.getElementById("scores").innerHTML = "Dolphin wins!";
     }
     else {
         log('Koala have the higer score');
         document.getElementById("scores").innerHTML = "Koala wins!";
+        return false;
     }
 }
 
@@ -70,7 +83,7 @@ function selecWinnerOfCompetition(score1, score2) {
     }
     else if (score1 === score2) {
         log('both have the same value: ${score1}');
-        return score1;
+        return -1;
     }
     else {
         log('score2 with value ${score2} is with the higer score');
