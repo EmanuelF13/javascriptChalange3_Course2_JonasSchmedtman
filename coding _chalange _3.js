@@ -1,4 +1,4 @@
-
+//TODO divide this in multiple script files
 var log = console.log.bind(console);
 var debugLog = console.log.bind(console, "DEBUG");
 var xmlhttp = new XMLHttpRequest();
@@ -51,18 +51,59 @@ let koalasMeansData1 = averageScore(88, 91, 110);
 let dolphinMeansData2 = averageScore(97, 112, 101);
 let koalasMeansData2 = averageScore(109, 95, 106);
 
+let database1 = [
+    ['Dolphin', 96, 108, 89],
+    ['Koala', 88, 91, 110]
+];
+
+let database2 = [
+    ['Dolphin', 97, 112, 101],
+    ['Koala', 109, 95, 106]
+];
+
+
+
 function mainDataConclusion() {
-    let isDolphinWinner = displayHigerScoreMessageOnInterface(dolphinMeansData2, koalasMeansData2);
-    if (isDolphinWinner === -1) { log("Both teams are the Winner!"); return; }
+    let isScoreOVer100 = isMinimumRequirementsToQualify(dolphinMeansData2, 'Dolphin') && isMinimumRequirementsToQualify(koalasMeansData2, 'Koala');
+    let isDolphinWinner = displayHigerScoreMessageOnInterface(dolphinMeansData2, koalasMeansData2, isScoreOVer100);
+    if (isDolphinWinner === -1 && isScoreOVer100) { log("Final results: Both teams are the Winner!"); return; }
     if (isDolphinWinner) log("As expecte Dolphin Wins!");
     else log("As expected Koala Wins!");
 }
 
-function displayHigerScoreMessageOnInterface(dolphinData, koalaData) {
+/*
+function parseArray(database) {
+    console.table(database);
+    database.forEach((teamData)
+    for (let i = 0; i < teamData.length; i++) {
+
+    }
+    );
+}
+*/
+
+function isMinimumRequirementsToQualify(meansOfScores, nameOfTeam) {
+    if (meansOfScores > 100) {
+        log('Team ${nameOfTeam} is qualified! ');
+        return true;
+    }
+    else {
+        log('Team ${nameOfTeam} is disqualified! Cause of ${meansOfScores} is lower then 100.');
+        return false;
+    }
+}
+//TO do stings should be const
+
+function displayHigerScoreMessageOnInterface(dolphinData, koalaData, isScoresOver100) {
     changeScoresButtons();
     if (selecWinnerOfCompetition(dolphinData, koalaData) === -1) {
-        log("Both teams are the winner!");
-        document.getElementById("scores").innerHTML = "Both teams are equaly the best!";
+        log("Both teams have the same score!");
+        if (isScoresOver100) {
+            document.getElementById("scores").innerHTML = "Both teams may be the winner!";
+        }
+        else {
+            document.getElementById("scores").innerHTML = "No one wins! /n Scores are bellow 100!";
+        }
         return -1;
     }
     if (selecWinnerOfCompetition(dolphinData, koalaData) === dolphinData) {
