@@ -1,0 +1,26 @@
+{
+    "name": "ChalangeCalculator",
+    "teams": 2,
+    "Dolphin": [
+        {
+            "firstYear": "96,108,89"
+        },
+        {
+            "secondYear": "97, 112 101"
+        },
+        {
+            "thridYear": "0, 0, 0"
+        }
+    ],
+    "Koalas": [
+        {
+            "firstYear": "88, 91, 110"
+        },
+        {
+            "secondYear": "109, 95, 106"
+        },
+        {
+            "thridYear": "0, 0, 0"
+        }
+    ]
+}
