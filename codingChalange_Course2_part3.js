@@ -1,0 +1,2 @@
+let billValue = 275;
+console.log(`The bill was ${billValue}, the tip was ${billValue > 50 && billValue < 300 ? billValue * 0.15 : bilValue * 0.20}, and the total value is ${billValue > 50 && billValue < 300 ? (billValue * 0.15) + billValue : (bilValue * 0.2) + billValue}.`);
